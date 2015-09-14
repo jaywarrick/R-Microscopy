@@ -46,7 +46,8 @@ em$t684$X.T <- em$t684$X.T * 100
 em$t809 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/809.txt', header=TRUE)
 em$t809$X.T <- em$t809$X.T * 100
 
-flNames <- list(Alexa488 = 'Alexa 488',
+flNames <- list(Alexa350 = 'Alexa 350',
+Alexa488 = 'Alexa 488',
 Alexa555 = 'Alexa 555',
 Alexa647 = 'Alexa 647',
 Alexa750 = 'Alexa 750',
@@ -83,8 +84,9 @@ TxRed = 'Texas Red')
 fl <- list()
 for(name in names(flNames))
 {
+     print(name)
      fl[[paste0(name, 'EX')]] <- read.table(file=paste0('~/Public/DropBox/GitHub/R-Microscopy/Spectra/', name, 'EX.txt'), header=TRUE)
-     if(name != 'Hoechst' && name != 'CellTrackerRed')
+     if(! (name %in% c('Alexa350','Hoechst','CellTrackerRed')) )
      {
           fl[[paste0(name, 'EX')]]$X.T <- fl[[paste0(name, 'EX')]]$X.T * 100
      }
@@ -94,7 +96,7 @@ for(name in names(flNames))
      fl[[paste0(name, 'EX')]] <- rbind(data.frame(wl=fl[[paste0(name, 'EX')]]$wl[1]-2.5, X.T=0), fl[[paste0(name, 'EX')]])
      fl[[paste0(name, 'EX')]] <- rbind(fl[[paste0(name, 'EX')]], data.frame(wl=lastWL+2.5, X.T=0))
      fl[[paste0(name, 'EM')]] <- read.table(file=paste0('~/Public/DropBox/GitHub/R-Microscopy/Spectra/', name, 'EM.txt'), header=TRUE)
-     if(name != 'Hoechst' && name != 'CellTrackerRed')
+     if(! (name %in% c('Alexa350','Hoechst','CellTrackerRed')) )
      {
           fl[[paste0(name, 'EM')]]$X.T <- fl[[paste0(name, 'EM')]]$X.T * 100
      }
@@ -133,6 +135,14 @@ plotSpectra <- function(ex, em, name='t390')
 par(mar=c(4.1,4.1,2.5,0.5))
 plot(t390$wl,t390$X.T, type='l', ylab='% Transmission', xlab='Wavelength [nm]', main='390 X 440')
 polyCurve(em$t390,from=200,to=1200, n=nrow(em$t390), col='red')
+
+duh <- read.csv(file='/Users/jaywarrick/Downloads/Alexa350.csv', header=TRUE)
+duhEX <- duh[ ,c(1,2)]
+names(duhEX) <- c('wl','X.T')
+write.table(duhEX, file='/Users/jaywarrick/Public/DropBox/GitHub/R-Microscopy/Spectra/Alexa350EX.txt', row.names=F)
+duhEM <- duh[ ,c(1,3)]
+names(duhEM) <- c('wl','X.T')
+write.table(duhEM, file='/Users/jaywarrick/Public/DropBox/GitHub/R-Microscopy/Spectra/Alexa350EM.txt', row.names=F)
 
 duh <- read.csv(file='~/Desktop/Scope Data/Hoechst.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
