@@ -25,25 +25,25 @@ polyCurve <- function(data, from, to, n = 5000, miny=0, col = "red", border = co
 
 ex <- list()
 # Excitation
-ex$t390 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/390.txt', header=TRUE)
-#ex$t438 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/438.txt', header=TRUE)
-ex$t485 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/485.txt', header=TRUE)
-ex$t560 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/560.txt', header=TRUE)
-#ex$t585 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/585.txt', header=TRUE)
-ex$t648 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/648.txt', header=TRUE)
-ex$t740 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/740.txt', header=TRUE)
+ex$t390 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/390.txt', header=TRUE)
+#ex$t438 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/438.txt', header=TRUE)
+ex$t485 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/485.txt', header=TRUE)
+ex$t560 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/560.txt', header=TRUE)
+#ex$t585 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/585.txt', header=TRUE)
+ex$t648 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/648.txt', header=TRUE)
+ex$t740 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/740.txt', header=TRUE)
 
 # Emission
 em <- list()
-em$t440 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/440.txt', header=TRUE)
+em$t440 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/440.txt', header=TRUE)
 em$t440$X.T <- em$t440$X.T * 100
-em$t525 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/525.txt', header=TRUE)
+em$t525 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/525.txt', header=TRUE)
 em$t525$X.T <- em$t525$X.T * 100
-em$t607 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/607.txt', header=TRUE)
+em$t607 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/607.txt', header=TRUE)
 em$t607$X.T <- em$t607$X.T * 100
-em$t684 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/684.txt', header=TRUE)
+em$t684 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/684.txt', header=TRUE)
 em$t684$X.T <- em$t684$X.T * 100
-em$t809 <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/809.txt', header=TRUE)
+em$t809 <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/809.txt', header=TRUE)
 em$t809$X.T <- em$t809$X.T * 100
 
 flNames <- list(Alexa350 = 'Alexa 350',
@@ -85,7 +85,7 @@ fl <- list()
 for(name in names(flNames))
 {
      print(name)
-     fl[[paste0(name, 'EX')]] <- read.table(file=paste0('~/Public/DropBox/GitHub/R-Microscopy/Spectra/', name, 'EX.txt'), header=TRUE)
+     fl[[paste0(name, 'EX')]] <- read.table(file=paste0('~/Documents/GitHub/R-Microscopy/Spectra/', name, 'EX.txt'), header=TRUE)
      if(! (name %in% c('Alexa350','Hoechst','CellTrackerRed')) )
      {
           fl[[paste0(name, 'EX')]]$X.T <- fl[[paste0(name, 'EX')]]$X.T * 100
@@ -95,7 +95,7 @@ for(name in names(flNames))
      fl[[paste0(name, 'EX')]] <- rbind(fl[[paste0(name, 'EX')]], data.frame(wl=lastWL+1.5, X.T=0))
      fl[[paste0(name, 'EX')]] <- rbind(data.frame(wl=fl[[paste0(name, 'EX')]]$wl[1]-2.5, X.T=0), fl[[paste0(name, 'EX')]])
      fl[[paste0(name, 'EX')]] <- rbind(fl[[paste0(name, 'EX')]], data.frame(wl=lastWL+2.5, X.T=0))
-     fl[[paste0(name, 'EM')]] <- read.table(file=paste0('~/Public/DropBox/GitHub/R-Microscopy/Spectra/', name, 'EM.txt'), header=TRUE)
+     fl[[paste0(name, 'EM')]] <- read.table(file=paste0('~/Documents/GitHub/R-Microscopy/Spectra/', name, 'EM.txt'), header=TRUE)
      if(! (name %in% c('Alexa350','Hoechst','CellTrackerRed')) )
      {
           fl[[paste0(name, 'EM')]]$X.T <- fl[[paste0(name, 'EM')]]$X.T * 100
@@ -109,7 +109,7 @@ for(name in names(flNames))
 
 for(name in names(flNames))
 {
-     pdf(file=paste0('~/Public/DropBox/GitHub/R-Microscopy/Spectra/Plots/',name,'.pdf'), width=9, height=6.5)
+     pdf(file=paste0('~/Documents/GitHub/R-Microscopy/Spectra/Plots/',name,'.pdf'), width=9, height=6.5)
      plot(c(), c(), xlim=c(350,850), ylim=c(0,100), xlab='Wavelength [nm]', ylab='% Transmission', main=flNames[[name]], cex=1.5)
      polyCurve(fl[[paste0(name, 'EX')]], from=350, to=1200, n=1000, miny=0, col=rgb(0,0,0,0.15), bor=gray(0.5), lty=1)
      polyCurve(fl[[paste0(name, 'EM')]], from=350, to=1200, n=1000, miny=0, col=rgb(0,0,0,0.3), bor='black', lty=1)
@@ -125,7 +125,8 @@ for(name in names(flNames))
 }
 
 # Dichroic
-tx$cube <- read.table(file='~/Public/DropBox/GitHub/R-Microscopy/Spectra/cube.txt', header=TRUE)
+tx <- list()
+tx$cube <- read.table(file='~/Documents/GitHub/R-Microscopy/Spectra/cube.txt', header=TRUE)
 tx$cube$X.T <- tx$cube$X.T * 100
 
 # Fluorophores
@@ -133,29 +134,30 @@ tx$DAPI <-
 
 plotSpectra <- function(ex, em, name='t390')
 par(mar=c(4.1,4.1,2.5,0.5))
-plot(t390$wl,t390$X.T, type='l', ylab='% Transmission', xlab='Wavelength [nm]', main='390 X 440')
-polyCurve(em$t390,from=200,to=1200, n=nrow(em$t390), col='red')
+plot(ex$t390$wl,ex$t390$X.T, type='l', ylab='% Transmission', xlab='Wavelength [nm]', main='390 X 440')
+polyCurve(ex$t390,from=200,to=1200, n=nrow(ex$t390), col='red')
 
-duh <- read.csv(file='/Users/jaywarrick/Downloads/Alexa350.csv', header=TRUE)
+duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='/Users/jaywarrick/Public/DropBox/GitHub/R-Microscopy/Spectra/Alexa350EX.txt', row.names=F)
+write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='/Users/jaywarrick/Public/DropBox/GitHub/R-Microscopy/Spectra/Alexa350EM.txt', row.names=F)
+write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EM.txt', row.names=F)
 
-duh <- read.csv(file='~/Desktop/Scope Data/Hoechst.csv', header=TRUE)
+duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Hoechst.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='~/Desktop/Scope Data/HoechstEX.txt', row.names=F)
+write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='~/Desktop/Scope Data/HoechstEM.txt', row.names=F)
+write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEM.txt', row.names=F)
 
-duh <- read.csv(file='~/Desktop/Scope Data/CellTrackerRedCMTPX.csv', header=TRUE)
+duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedCMTPX.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='~/Desktop/Scope Data/CellTrackerRedEX.txt', row.names=F)
+write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='~/Desktop/Scope Data/CellTrackerRedEM.txt', row.names=F)
+write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEM.txt', row.names=F)
+
