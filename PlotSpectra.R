@@ -137,27 +137,27 @@ par(mar=c(4.1,4.1,2.5,0.5))
 plot(ex$t390$wl,ex$t390$X.T, type='l', ylab='% Transmission', xlab='Wavelength [nm]', main='390 X 440')
 polyCurve(ex$t390,from=200,to=1200, n=nrow(ex$t390), col='red')
 
-duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350.csv', header=TRUE)
+duh <- read.csv(file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EX.txt', row.names=F)
+write.table(duhEX, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EM.txt', row.names=F)
+write.table(duhEM, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/Alexa350EM.txt', row.names=F)
 
-duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/Hoechst.csv', header=TRUE)
+duh <- read.csv(file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/Hoechst.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEX.txt', row.names=F)
+write.table(duhEX, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEM.txt', row.names=F)
+write.table(duhEM, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/HoechstEM.txt', row.names=F)
 
-duh <- read.csv(file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedCMTPX.csv', header=TRUE)
+duh <- read.csv(file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedCMTPX.csv', header=TRUE)
 duhEX <- duh[ ,c(1,2)]
 names(duhEX) <- c('wl','X.T')
-write.table(duhEX, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEX.txt', row.names=F)
+write.table(duhEX, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEX.txt', row.names=F)
 duhEM <- duh[ ,c(1,3)]
 names(duhEM) <- c('wl','X.T')
-write.table(duhEM, file='/Users/jaywarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEM.txt', row.names=F)
+write.table(duhEM, file='/Users/jwarrick/Documents/GitHub/R-Microscopy/Spectra/CellTrackerRedEM.txt', row.names=F)
 
